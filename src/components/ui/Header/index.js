@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import Cart from "../../app/Cart";
 
-function Header() {
+const Header = () => {
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const [cartState, setCartState] = useState(false);
 
@@ -28,6 +28,6 @@ function Header() {
       {cartState && <Cart state={cartState} onChange={changeState}></Cart>}
     </Fragment>
   );
-}
+};
 
 export default Header;

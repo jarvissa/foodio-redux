@@ -39,21 +39,28 @@ const reducer = (state, action) => {
         error,
       };
 
+    case "reset":
+      return initialState;
+
     default:
       return state;
   }
 };
 
-export const useInput = (field, rules) => {
+export const useInput = (rules) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const handleChange = (event) => {
-    dispatch({ type: "change", value: event.target.value, field, rules });
+    dispatch({ type: "change", field: event.target, rules });
   };
 
   const handleBlur = (event) => {
-    dispatch({ type: "blur", value: event.target.value, field, rules });
+    dispatch({ type: "blur", field: event.target, rules });
   };
 
-  return { state, handleChange, handleBlur };
+  const reset = () => {
+    dispatch({ type: "reset" });
+  };
+
+  return { state, handleChange, handleBlur, reset };
 };

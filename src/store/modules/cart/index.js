@@ -15,7 +15,7 @@ export const cart = createSlice({
         (item) => item.id !== action.payload.id
       );
 
-      filteredCartItems.push(action.payload);
+      action.payload.amount !== 0 && filteredCartItems.push(action.payload);
 
       state.cartItems = [...filteredCartItems].sort((a, b) =>
         a.id.localeCompare(b.id)

@@ -41,7 +41,7 @@ const Dialog = (props) => {
   return props.state ? (
     ReactDOM.createPortal(
       <div
-        className="overlay fixed inset-0 z-50 bg-black bg-opacity-60 transition-all"
+        className="overlay fixed inset-0 z-20 bg-black bg-opacity-60 transition-all"
         onClick={handleClick}
       >
         <Card className={className}>

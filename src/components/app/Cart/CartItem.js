@@ -1,4 +1,18 @@
+import { useDispatch } from "react-redux";
+import { updateCart } from "../../../store/modules/cart";
+
 const CartItem = (props) => {
+  const dispatch = useDispatch();
+
+  const handleClick = (type) => {
+    dispatch(
+      updateCart({
+        ...props.item,
+        amount: type === "dec" ? props.item.amount - 1 : props.item.amount + 1,
+      })
+    );
+  };
+
   return (
     <div className="flex justify-between items-center mb-5 pb-3 border-b-2 border-blue-500">
       <div>
@@ -12,10 +26,16 @@ const CartItem = (props) => {
       </div>
 
       <div className="sm:flex sm:gap-2">
-        <div className="mb-2 px-4 text-blue-500 text-center border-2 border-blue-500 font-bold cursor-pointer select-none transition-all sm:mb-0 hover:bg-blue-500 hover:text-white">
+        <div
+          className="mb-2 px-4 text-blue-500 text-center border-2 border-blue-500 font-bold cursor-pointer select-none transition-all sm:mb-0 hover:bg-blue-500 hover:text-white"
+          onClick={() => handleClick("dec")}
+        >
           -
         </div>
-        <div className="px-4 text-blue-500 text-center border-2 border-blue-500 font-bold cursor-pointer select-none transition-all hover:bg-blue-500 hover:text-white">
+        <div
+          className="px-4 text-blue-500 text-center border-2 border-blue-500 font-bold cursor-pointer select-none transition-all hover:bg-blue-500 hover:text-white"
+          onClick={() => handleClick("inc")}
+        >
           +
         </div>
       </div>

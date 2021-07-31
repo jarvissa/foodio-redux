@@ -1,31 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import db from "../../../firebase/firestore";
 
 export const useCollection = (collection) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const unsubscribe = db.collection(collection).onSnapshot(
-      (snapshot) => {
-        const res = [];
+  const add = async (payload) => {
+    setLoading(true);
 
-        snapshot.docs.forEach((doc) => {
-          res.push({ id: doc.id, ...doc.data() });
-        });
+    try {
+      const res = await db.collection(collection).add(payload);
+      setData(res);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        setData(res);
-        setLoading(false);
-      },
-      (err) => {
-        setError(err);
-        setLoading(false);
-      }
-    );
-
-    return unsubscribe;
-  }, [collection]);
-
-  return { data, error, loading };
+  return { data, error, loading, add };
 };

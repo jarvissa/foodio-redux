@@ -10,9 +10,7 @@ function Meal(props) {
   const { name, description, price } = props.meal;
   const amount = useRef("");
 
-  const { state, handleChange, handleBlur } = useInput(amount.current, [
-    "required",
-  ]);
+  const { state, handleChange, handleBlur, reset } = useInput(["required"]);
 
   const dispatch = useDispatch();
 
@@ -22,6 +20,8 @@ function Meal(props) {
     }
 
     dispatch(updateCart({ ...props.meal, amount: +amount.current.value }));
+
+    reset();
   };
 
   return (
@@ -40,7 +40,12 @@ function Meal(props) {
             name="Amount"
             min="1"
             ref={amount}
-            className="w-20 border-2 outline-none sm:w-32"
+            value={state.value}
+            className={`w-20 pl-1 border-2 outline-none sm:w-32 ${
+              state.error
+                ? "border-red-500 focus:border-red-500"
+                : "focus:border-blue-500"
+            }`}
             onChange={handleChange}
             onBlur={handleBlur}
             message={state.error}

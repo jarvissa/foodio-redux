@@ -3,6 +3,7 @@ import Wrapper from "../../Wrapper";
 
 const Input = React.forwardRef((props, ref) => {
   let className = "";
+  const value = props.value ? props.value : "";
 
   if (props.className) {
     className = `${props.className}`;
@@ -16,6 +17,7 @@ const Input = React.forwardRef((props, ref) => {
         name={props.name}
         min={props.min}
         ref={ref}
+        value={value}
         className={className}
         onChange={props.onChange}
         onBlur={props.onBlur}

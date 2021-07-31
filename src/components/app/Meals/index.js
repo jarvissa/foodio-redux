@@ -1,7 +1,7 @@
 import Card from "../../ui/Card";
 import Meal from "./Meal";
 import Wrapper from "../../ui/Wrapper";
-import { useCollection } from "../../../hooks/firebase/firestore/useCollection";
+import { useGetCollection } from "../../../hooks/firebase/firestore/useGetCollection";
 import Loading from "../../ui/Loading";
 
 function Meals() {
@@ -9,7 +9,7 @@ function Meals() {
     data: meals,
     error: mealsError,
     loading: mealsLoading,
-  } = useCollection("meals");
+  } = useGetCollection("meals");
 
   return (
     <Wrapper className="p-5">

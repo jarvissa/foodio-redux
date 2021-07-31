@@ -22,7 +22,7 @@ function Button(props) {
   };
 
   function generateButton() {
-    let className = "flex transition-all";
+    let className = "flex outline-none transition-all";
 
     for (const prop in classes) {
       if (classes[prop]) {
